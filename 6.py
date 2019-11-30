@@ -1,20 +1,20 @@
-from urllib.request import urlopen
-import pickle
-import os 
-import glob
+import zipfile
 
 nothing = '90052'
 
+zf = zipfile.ZipFile('6_.zip')
+total_str = ''
 
-# while True:
-    # with open('6_/'+nothing+'.txt') as f:
-        # text = f.read()
-    # print(text)
-    # nothing = text[16:]
-    
-    
-    
-for file in glob.glob('6_/*.txt'):
-    with open(file) as f:
-        text = f.read()
+while True:
+    fname = nothing+'.txt'
+    try:
+        with open('6_/'+fname) as f:
+            text = f.read()
+    except:
+        break
     print(text)
+    total_str += zf.getinfo(fname).comment.decode("utf-8") 
+    nothing = text[16:]
+
+print(total_str)
+    
